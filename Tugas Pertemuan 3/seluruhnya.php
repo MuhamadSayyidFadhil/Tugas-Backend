@@ -44,11 +44,9 @@ $animal = new Animal();
 
 $animal->index();
 
-// Menambahkan hewan baru
 $animal->store("Kudanil");
 $animal->index(); 
 
-// Memperbarui hewan
 $animal->update(2, "Kecoa");
 $animal->index();
 
