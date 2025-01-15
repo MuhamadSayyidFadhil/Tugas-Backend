@@ -6,6 +6,7 @@ class Alumni {
             const sql = 'SELECT * FROM alumni';
             db.query(sql, (err, results) => {
                 if (err) {
+                    console.error("Error fetching all alumni:", err);
                     reject(err);
                 } else {
                     resolve(results);
@@ -22,6 +23,7 @@ class Alumni {
 
             db.query(sql, values, (err, results) => {
                 if (err) {
+                    console.error("Error inserting alumni:", err);
                     reject(err);
                 } else {
                     resolve({
@@ -47,6 +49,7 @@ class Alumni {
 
             db.query(sql, values, (err, results) => {
                 if (err) {
+                    console.error("Error updating alumni:", err);
                     reject(err);
                 } else {
                     resolve(results.affectedRows > 0);
@@ -60,6 +63,7 @@ class Alumni {
             const sql = 'DELETE FROM alumni WHERE id = ?';
             db.query(sql, [id], (err, results) => {
                 if (err) {
+                    console.error("Error deleting alumni:", err);
                     reject(err);
                 } else {
                     resolve(results.affectedRows > 0);
@@ -73,6 +77,7 @@ class Alumni {
             const sql = 'SELECT * FROM alumni WHERE id = ?';
             db.query(sql, [id], (err, results) => {
                 if (err) {
+                    console.error("Error finding alumni by ID:", err);
                     reject(err);
                 } else {
                     resolve(results[0] || null);
@@ -84,8 +89,10 @@ class Alumni {
     static search(name) {
         return new Promise((resolve, reject) => {
             const sql = 'SELECT * FROM alumni WHERE name LIKE ?';
-            db.query(sql, [`%${name}%`], (err, results) => {
+            const searchValue = `%${name}%`;
+            db.query(sql, [searchValue], (err, results) => {
                 if (err) {
+                    console.error("Error searching alumni by name:", err);
                     reject(err);
                 } else {
                     resolve(results);
@@ -99,6 +106,7 @@ class Alumni {
             const sql = 'SELECT * FROM alumni WHERE status = ?';
             db.query(sql, [status], (err, results) => {
                 if (err) {
+                    console.error("Error finding alumni by status:", err);
                     reject(err);
                 } else {
                     resolve(results);
